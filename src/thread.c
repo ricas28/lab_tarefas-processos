@@ -23,7 +23,7 @@ int main() {
     g_value = 2;
     
     if(pthread_join(tid, NULL) != 0) {
-        fprintf(stderr, "error joining thred.\n");
+        fprintf(stderr, "error joining thread.\n");
         return -1;
     }
 
