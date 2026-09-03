@@ -348,7 +348,7 @@ int load_ghost(board_t* board) {
     board->board[3 * board->width + 1].content = 'M'; // Monster
     board->ghosts[0].pos_x = 1;
     board->ghosts[0].pos_y = 3;
-    board->ghosts[0].passo = 0;
+    board->ghosts[0].passo = 4;
     board->ghosts[0].waiting = 0;
     board->ghosts[0].current_move = 0;
     board->ghosts[0].n_moves = 16;
@@ -365,7 +365,7 @@ int load_ghost(board_t* board) {
     board->board[2 * board->width + 4].content = 'M'; // Monster
     board->ghosts[1].pos_x = 4;
     board->ghosts[1].pos_y = 2;
-    board->ghosts[1].passo = 1;
+    board->ghosts[1].passo = 8;
     board->ghosts[1].waiting = 1;
     board->ghosts[1].current_move = 0;
     board->ghosts[1].n_moves = 1;
