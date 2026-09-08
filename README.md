@@ -54,11 +54,11 @@ O que muda no resultado que este novo programa imprime no *stdout*?
 
 ----
 
-## Exercício Extra
+## Mini-exercício
 
 Neste exercício iremos transformar uma implementação estática do **pacman**, numa versão paralelizada, onde cada entidade é controlada por uma thread diferente.
 
-Sempre que forem criadas _threads_, utilize a bilbioteca POSIX `pthread`.
+Sempre que forem criadas _threads_, utilize a biblioteca POSIX `pthread`.
 
 Sempre que for pedido para algo ser apresentado, utilize a função `debug`.
 
@@ -73,14 +73,14 @@ sudo apt-get install libncurses-dev
 
 - **macOS**
 
-Caso utlize **Homebrew**, execute:
+Caso utilize **Homebrew**, execute:
 ```bash
 brew install ncurses
 ```
 
 - **Computador do Laboratório da RNL**
 
-Caso esteja a fazer este exercíco num computador de um laboratório da RNL, pode criar um ambiente temporário, sem instalar permanente a biblioteca no sistema.
+Caso esteja a fazer este exercício num computador de um laboratório da RNL, pode criar um ambiente temporário, sem instalar permanentemente a biblioteca no sistema.
 
 Execute na diretoria do projeto:
 ```bash
@@ -89,7 +89,9 @@ nix shell nixpkgs#ncurses
 
 Depois de entrar na shell, poderá executar o exercício sem problema nenhum.
 
-#### Implementação original  
+----
+
+### Implementação original  
 
 Começar por ver a implementação original do **pacmanIST** na pasta `pacmanIST-original`.
 
@@ -102,7 +104,7 @@ Analise o código de forma a perceber como o jogo é implementado e experimente 
 
 Pretende-se que o programa passe a ser paralelizado de forma a que os monstros se  movimentem sem terem de esperar pelo input do pacman.
 
-Começar pela implementação do pacmanIST adaptada a este exercício na pasta `pacmanIST-adapted`. Nesta versão, os inputs do nível, e de cada entidade, são fornecidos por ficheiros, de maneira a termos um comportamento determinístico. Analise os mesmos na pasta `levels_auto` e perceba qual a sua sintaxe.
+Começar pela implementação do pacmanIST adaptada a este exercício, na pasta `pacmanIST-adapted`. Nesta versão, os inputs do nível, e de cada entidade, são fornecidos por ficheiros, de maneira a termos um comportamento determinístico. Analise os mesmos, na pasta `levels_auto`, e perceba qual a sua sintaxe.
 
 Analise o código do ficheiro `game.c` e veja como as threads para o pacman e para a interação com a biblioteca ncurses são geridas.
 
@@ -143,12 +145,12 @@ Total moves: 67
 Execute o programa várias vezes e observe os valores obtidos.
 
 Considere os seguintes pontos:
-- Quem pode alterar a varíavel `moves`?
+- Quem pode alterar a variável `moves`?
 - Podem existir duas _threads_ a executar `moves++` simultaneamente?
 - O que poderá acontecer se duas _threads_ tentarem alterar a variável ao mesmo tempo?
 - O valor apresentado no final corresponde necessariamente ao número esperado de movimentos?
 
-**Nesta alínea não é necessário corrigir o problema**
+**Nesta alínea não é necessário corrigir o problema.**
 
 O objetivo é identificar e observar uma possível _**race condition**_ provocada pelo acesso concorrente à variável global.
 
@@ -184,11 +186,11 @@ Considere:
 - Como pode uma _thread_ devolver um valor?
 - Como pode a função que criou a _thread_ obter esse valor?
 - Qual é a diferença entre o contador local desta alínea e a variável global `moves` da alínea anterior? 
-- Haverá algum risco com este contador local?
+- Porque razão este contador não apresenta o mesmo problema da variável global `moves`?
 
 ### 4. Thread de monitorização
 
-Pretende-se agora criar uma _thread_ adicional que seja responsável por obter periodicamnete informações sobre o estado do jogo.
+Pretende-se agora criar uma _thread_ adicional que seja responsável por obter periodicamente informações sobre o estado do jogo.
 
 **d)** Criar _thread_ de monitorização
 
@@ -200,7 +202,7 @@ A _thread_ deverá executar, repetidamente, o seguinte procedimento:
 
 1. Esperar o número de segundos indicado pelo argumento de espera;
 2. Criar um processo filho através de `fork()`;
-3. O processo filho deverá apresentar o número de movimentos realizados e o conteúdo do `game_board` usando a função `print_board`;
+3. O processo filho deverá apresentar o número de movimentos realizados e o conteúdo do `game_board` utilizando a função `print_board`;
 4. O processo filho deverá terminar;
 5. A _thread_ deverá continuar a executar;
 
@@ -208,7 +210,7 @@ Por exemplo:
 
 ```bash
 --- Current Game State ---
-Curent total moves: 42
+Current total moves: 42
 
 === [110412] LEVEL INFO ===
 Dimensions: 10 x 10
@@ -238,7 +240,7 @@ A _thread_ de monitorização deverá continuar a criar processos de `wait_time`
 
 Considere os seguintes pontos:
 - Se o Pacman se mover depois do `fork()`, o processo filho vê essa alteração?
-- O valor de `moves` no processo filgo continua a ser alterado enquanto o jogo decorre?
+- O valor de `moves` no processo filho continua a ser alterado enquanto o jogo decorre?
 - Qual a diferença, neste aspeto, entre uma _thread_ e um processo?
 - O que acontece à memória do processo filho quando este termina?
 
