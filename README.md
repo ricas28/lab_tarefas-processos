@@ -56,6 +56,8 @@ O que muda no resultado que este novo programa imprime no *stdout*?
 
 ## Mini-exercício
 
+## Mini-exercício
+
 Neste exercício iremos transformar uma implementação estática do **pacman**, numa versão paralelizada, onde cada entidade é controlada por uma thread diferente.
 
 Sempre que forem criadas _threads_, utilize a biblioteca POSIX `pthread`.
@@ -128,7 +130,7 @@ Crie uma variável global:
 int moves = 0;
 ```
 
-**b)** Incrementar contador Global
+**a)** Incrementar contador global
 
 Sempre que o Pacman ou um monstro realizar um movimento, o programa deverá executar:
 
@@ -145,7 +147,6 @@ Total moves: 67
 Execute o programa várias vezes e observe os valores obtidos.
 
 Considere os seguintes pontos:
-- Quem pode alterar a variável `moves`?
 - Podem existir duas _threads_ a executar `moves++` simultaneamente?
 - O que poderá acontecer se duas _threads_ tentarem alterar a variável ao mesmo tempo?
 - O valor apresentado no final corresponde necessariamente ao número esperado de movimentos?
@@ -154,11 +155,9 @@ Considere os seguintes pontos:
 
 O objetivo é identificar e observar uma possível _**race condition**_ provocada pelo acesso concorrente à variável global.
 
-### 3. Contabilizar os movimentos de cada monstro
+**b)** Contador local e valor de retorno da _thread_
 
 Pretende-se agora saber quantos movimentos realizou cada monstro.
-
-**c)** Contador local e valor de retorno da _thread_
 
 Altere a função das _threads_ dos monstros de forma a que cada um mantenha o seu próprio contador de movimentos.
 
@@ -188,11 +187,11 @@ Considere:
 - Qual é a diferença entre o contador local desta alínea e a variável global `moves` da alínea anterior? 
 - Porque razão este contador não apresenta o mesmo problema da variável global `moves`?
 
-### 4. Thread de monitorização
+### 3. Thread de monitorização
 
 Pretende-se agora criar uma _thread_ adicional que seja responsável por obter periodicamente informações sobre o estado do jogo.
 
-**d)** Criar _thread_ de monitorização
+**a)** _Thread_ de monitorização e `fork()`
 
 Crie uma nova _thread_ no início do jogo.
 
@@ -240,9 +239,33 @@ A _thread_ de monitorização deverá continuar a criar processos de `wait_time`
 
 Considere os seguintes pontos:
 - Se o Pacman se mover depois do `fork()`, o processo filho vê essa alteração?
-- O valor de `moves` no processo filho continua a ser alterado enquanto o jogo decorre?
 - Qual a diferença, neste aspeto, entre uma _thread_ e um processo?
 - O que acontece à memória do processo filho quando este termina?
+ 
+---
+
+### Avaliação em aula
+
+Quando tiver concluído o exercício, chame o docente do laboratório, para que possa demonstrar a solução em execução e responder a perguntas sobre a implementação.
+
+**A avaliação é presencial e individual.**
+
+Não basta que o código funcione, é necessário saber explicar como foi implementado e por que funciona.
+Podem também ser pedidas modificações de pormenor no momento.
+
+Em todo o caso, entregar a solução antes do fim da aula:
+
+**Fénix**, Avaliação, Projetos, **mini-Exercício 2**
+
+**Tenha em atenção o seguinte:**
+
+- só serão aceites trabalhos de estudantes que estiveram presentes no laboratório.
+Confirme que o docente registou a sua presença na aula;
+- assegure-se de que a solução é enviada em formato ZIP e que não contém ficheiros executáveis nem outros ficheiros gerados pela compilação.
+Antes de criar o ficheiro ZIP, limpe os ficheiros gerados manualmente ou com `make clean`;
+- deverá também incluir um ficheiro `README` com um breve resumo da funcionalidade implementada (parcial ou total).
+
+---
 
 ## Conclusão
 
