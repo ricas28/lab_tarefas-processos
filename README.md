@@ -20,7 +20,7 @@ Clone este repositório, usando: `git clone https://github.com/tecnico-so/lab_ta
 
 Aceda à diretoria com o comando: `cd lab_tarefas-processos`.
 
-Na pasta `src` estude, compile e execute a aplicação.  
+Na pasta `simple-example/src` estude, compile e execute a aplicação.  
 O programa cria diferentes tarefas (*threads*) a executar em paralelo.
 
 ### 1.1 Interpretação dos resultados
